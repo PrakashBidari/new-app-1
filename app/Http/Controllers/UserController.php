@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DonationForm;
+use App\Models\RequestForm;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +12,14 @@ use function Laravel\Prompts\alert;
 
 class UserController extends Controller
 {
+
+    public function dashboard()
+    {
+        $bloods = DonationForm::get();
+        $blood_requests = RequestForm::get();
+        return view('admin.index', compact('bloods','blood_requests'));
+    }
+
     public function index()
     {
         $users = User::all();
